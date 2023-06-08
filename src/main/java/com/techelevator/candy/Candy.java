@@ -4,11 +4,11 @@ public class Candy {
 
 
     //Constructor
-    public Candy(String ID, String name, boolean isWrapped, int quantity, double price){
+    public Candy(String ID, String name, boolean isWrapped, double price){
         this.ID = ID;
         this.name = name;
         this.isWrapped = isWrapped;
-        this.quantity = quantity;
+
         this.price = price;
     }
 
