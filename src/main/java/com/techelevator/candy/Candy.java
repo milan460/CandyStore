@@ -44,4 +44,15 @@ public class Candy {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Candy{" +
+                "ID='" + ID + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", isWrapped=" + isWrapped +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

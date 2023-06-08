@@ -4,6 +4,8 @@ import com.techelevator.candy.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -24,7 +26,7 @@ public class InventoryItem {
 
 
     //Methods
-    public Map<String, Candy> inventoryBuilder(String[] candies) {
+    public Map<String, Candy> inventoryBuilder() {
         inventory = new HashMap<>();
 
         File inventoryCSV = new File(filepath);
@@ -43,7 +45,8 @@ public class InventoryItem {
                     isWrapped = false;
                 }
 
-                int price = Integer.parseInt(currentLineToArray[3]);
+                double price = Double.parseDouble(currentLineToArray[3]);
+                //BigDecimal bD = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
                 String typeOfCandy = currentLineToArray[0];
 
                 if (typeOfCandy.equalsIgnoreCase("CH")) {
