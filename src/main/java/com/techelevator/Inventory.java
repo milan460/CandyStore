@@ -4,28 +4,23 @@ import com.techelevator.candy.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class InventoryItem {
+public class Inventory {
     //Constructor
-    public InventoryItem(String inventoryFilePath) {
+    public Inventory(String inventoryFilePath) {
         this.filepath = inventoryFilePath;
     }
-
 
     //Attributes
     private final String filepath;
     Map<String, Candy> inventory;
 
 
-
     //Methods
-    public Map<String, Candy> inventoryBuilder() {
+    public Map<String, Candy> inventoryBuilder() throws FileNotFoundException {
         inventory = new TreeMap<>();
 
         File inventoryCSV = new File(filepath);
@@ -62,16 +57,9 @@ public class InventoryItem {
                 }
                 inventory.put(ID, currentItem);
             }
-        } catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Input file does not exist");
         }
         return inventory;
     }
-
-    public void restockInventory() {
-        for (Map.Entry<String, Candy> candy : inventory.entrySet()) {
-            candy.getValue().setQuantity(100);
-        }
-    }
 }
-

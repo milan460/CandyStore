@@ -1,5 +1,6 @@
 package com.techelevator.view;
 
+import com.techelevator.Money;
 import com.techelevator.candy.Candy;
 
 import java.util.Locale;
@@ -8,14 +9,19 @@ import java.util.Scanner;
 
 public class Menu {
 
+    private Money money = new Money();
     private Scanner userInput = new Scanner(System.in);
+
+
     public String mainMenu(){
 
         System.out.println("(1) Show Inventory");
         System.out.println("(2) Make Sale");
         System.out.println("(3) Quit");
+        System.out.println("Choose menu option: ");
         String userChoice = userInput.nextLine();
         String option = userChoice.trim();
+
         if(option.equalsIgnoreCase("1")){
             option = "display";
         }
@@ -39,6 +45,7 @@ public class Menu {
             if(candyEntry.getValue().isWrapped() == true){
                 wrapped = "Y";
             }
+
             if(candyEntry.getValue().getQuantity() == 0){
                 soldOut = "SOLD OUT";
             }
@@ -47,5 +54,23 @@ public class Menu {
         }
     }
 
+    public String subMenu(){
+        System.out.println("(1) Take Money");
+        System.out.println("(2) Select Products");
+        System.out.println("(3) Complete Sale");
+        System.out.printf("Current Customer Balance: $%-5.2f", money.getBalance());
+        String userChoice = userInput.nextLine();
+        String option = userChoice.trim();
 
+        if(option.equalsIgnoreCase("1")){
+            option = "take money";
+        }
+        else if (option.equalsIgnoreCase("2")){
+            option = "select products";
+        }
+        else if (option.equalsIgnoreCase("3")){
+            option = "complete sale";
+        }
+        return option;
+    }
 }

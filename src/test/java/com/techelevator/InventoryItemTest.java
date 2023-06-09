@@ -5,20 +5,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class InventoryItemTest {
-    private InventoryItem inventoryItem;
+    private Inventory inventoryItem;
 
     @Before
     public void setup(){
-        inventoryItem = new InventoryItem("inventoryTest.csv");
+        inventoryItem = new Inventory("inventoryTest.csv");
     }
 
     @Test
-    public void test_inventory_builder(){
+    public void test_inventory_builder() throws FileNotFoundException {
         //Arrange
         Map<String, Candy> expectedInventory = new TreeMap<>();
         expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
@@ -32,7 +32,7 @@ public class InventoryItemTest {
     }
 
     @Test
-    public void test_restock_inventory(){
+    public void test_restock_inventory() throws FileNotFoundException {
         //Arrange
         Map<String, Candy> expectedInventory = new TreeMap<>();
         expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
