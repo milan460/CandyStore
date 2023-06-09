@@ -6,6 +6,7 @@ import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ApplicationCLI {
 
@@ -30,7 +31,7 @@ public class ApplicationCLI {
 //		System.out.println(money.getBalance());
 
 		InventoryItem inventoryItem = new InventoryItem("inventory.csv");
-		Map<String, Candy> candyMap = new HashMap<>();
+		Map<String, Candy> candyMap = new TreeMap<>();
 		candyMap = inventoryItem.inventoryBuilder();
 //		inventoryItem.restockInventory();
 //		for (Map.Entry<String, Candy> candy : candyMap.entrySet()) {

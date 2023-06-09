@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class InventoryItemTest {
     private InventoryItem inventoryItem;
@@ -19,7 +20,7 @@ public class InventoryItemTest {
     @Test
     public void test_inventory_builder(){
         //Arrange
-        Map<String, Candy> expectedInventory = new HashMap<>();
+        Map<String, Candy> expectedInventory = new TreeMap<>();
         expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
         expectedInventory.put("S1", new SourCandy("S1", "Gummy Ants", false, 1.10));
         expectedInventory.put("H1", new HardCandy("H1", "Jolly Cowboy", true, 2.35));
@@ -33,7 +34,7 @@ public class InventoryItemTest {
     @Test
     public void test_restock_inventory(){
         //Arrange
-        Map<String, Candy> expectedInventory = new HashMap<>();
+        Map<String, Candy> expectedInventory = new TreeMap<>();
         expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
         expectedInventory.put("S1", new SourCandy("S1", "Gummy Ants", false, 1.10));
         expectedInventory.put("H1", new HardCandy("H1", "Jolly Cowboy", true, 2.35));

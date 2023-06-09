@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class InventoryItem {
     //Constructor
@@ -25,7 +26,7 @@ public class InventoryItem {
 
     //Methods
     public Map<String, Candy> inventoryBuilder() {
-        inventory = new HashMap<>();
+        inventory = new TreeMap<>();
 
         File inventoryCSV = new File(filepath);
 
