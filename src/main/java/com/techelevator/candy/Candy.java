@@ -1,5 +1,7 @@
 package com.techelevator.candy;
 
+import java.util.Objects;
+
 public class Candy {
 
 
@@ -54,5 +56,18 @@ public class Candy {
                 ", isWrapped=" + isWrapped +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Candy)) return false;
+        Candy candy = (Candy) o;
+        return Double.compare(candy.price, price) == 0 && isWrapped == candy.isWrapped && quantity == candy.quantity && Objects.equals(ID, candy.ID) && Objects.equals(name, candy.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, name, price, isWrapped, quantity);
     }
 }

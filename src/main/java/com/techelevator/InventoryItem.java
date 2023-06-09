@@ -22,8 +22,6 @@ public class InventoryItem {
     Map<String, Candy> inventory;
 
 
-    //Getters and Setters
-
 
     //Methods
     public Map<String, Candy> inventoryBuilder() {
@@ -71,9 +69,7 @@ public class InventoryItem {
 
     public void restockInventory() {
         for (Map.Entry<String, Candy> candy : inventory.entrySet()) {
-            if (candy.getValue().getQuantity() < 100) {
-                candy.getValue().setQuantity(100);
-            }
+            candy.getValue().setQuantity(100);
         }
     }
 }
