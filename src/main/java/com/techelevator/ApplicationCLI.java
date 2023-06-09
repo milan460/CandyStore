@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import com.techelevator.candy.Candy;
-import com.techelevator.candy.UpdatedInventory;
 import com.techelevator.view.Menu;
 
 import java.io.FileNotFoundException;
@@ -11,7 +10,6 @@ public class ApplicationCLI {
 
 	private Menu menu = new Menu();
 	private Map<String, Candy> inventory;
-	private UpdatedInventory updatedInventory;
 
 
 	public ApplicationCLI(Map<String, Candy> inventory) {
@@ -31,24 +29,6 @@ public class ApplicationCLI {
 		}
 		cli.run();
 
-		Money money = new Money();
-		Menu menu = new Menu();
-		menu.mainMenu();
-
-
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(100);
-		money.addMoney(99);
-		money.addMoney(1);
-		money.addMoney(1);
-		System.out.println(money.getBalance());
 
 //		InventoryItem inventoryItem = new InventoryItem("inventory.csv");
 //		Map<String, Candy> candyMap = new TreeMap<>();
@@ -76,20 +56,43 @@ public class ApplicationCLI {
 
 //		updatedInventory.restockInventory();
 //
-//
-//
-//
-//		while(true){
-//			String choice = menu.mainMenu();
-//			if (choice.equals("display")) {
-//				menu.displayInventory(inventory);
-//			}
-//		}
-//
-//	}
+
+		Money money = new Money();
+		while(true){
+			String choice = menu.mainMenu();
+			if (choice.equals("display")) {
+				menu.displayInventory(inventory);
+			}
+			else if(choice.equals("sale")){
+				String choiceSubmenu = menu.subMenu();
+				if(choiceSubmenu.equals("take money")){
+					menu.promptUserAmount();
+				}
+			}
+			else if(choice.equals("quit")){
+				System.exit(0);
+			}
+		}
 
 		//feel free to create private methods here if you are feeling up to it, so run() doesn't get so long...
-
+//		Money money = new Money();
+//		Menu menu = new Menu();
+//		menu.mainMenu();
+//
+//
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(100);
+//		money.addMoney(99);
+//		money.addMoney(1);
+//		money.addMoney(1);
+//		System.out.println(money.getBalance());
 
 	}
 }

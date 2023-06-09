@@ -55,6 +55,7 @@ public class Inventory {
                 } else if (typeOfCandy.equalsIgnoreCase("LI")) {
                     currentItem = new LicoriceCandy(ID, currentLineToArray[2], isWrapped, price);
                 }
+                currentItem.setQuantity(100);
                 inventory.put(ID, currentItem);
             }
         } catch (FileNotFoundException e) {

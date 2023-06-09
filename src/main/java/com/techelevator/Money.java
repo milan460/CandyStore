@@ -4,7 +4,7 @@ public class Money {
     //constructor
 
     //Attributes
-    private double balance = 0;
+    private double balance;
     private final double TWENTIES = 20.00;
     private final double TENS = 10.00;
     private final double FIVES = 5.00;
@@ -29,7 +29,7 @@ public class Money {
     public void addMoney(double amount) {
         do {
             if (amount <= 100 && balance + amount <= 1000) {
-                balance += amount;
+                balance = balance + amount;
                 break;
             }
         }

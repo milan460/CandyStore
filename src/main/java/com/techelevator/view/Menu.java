@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
-
     private Money money = new Money();
+
     private Scanner userInput = new Scanner(System.in);
 
 
@@ -54,11 +54,13 @@ public class Menu {
         }
     }
 
+
     public String subMenu(){
         System.out.println("(1) Take Money");
         System.out.println("(2) Select Products");
         System.out.println("(3) Complete Sale");
         System.out.printf("Current Customer Balance: $%-5.2f", money.getBalance());
+        System.out.println("\nChoose menu option: ");
         String userChoice = userInput.nextLine();
         String option = userChoice.trim();
 
@@ -73,4 +75,20 @@ public class Menu {
         }
         return option;
     }
+
+    public void promptUserAmount(){
+        while(true) {
+            System.out.println("Enter desired $ amount (Max $100 per entry): ");
+            String userChoice = userInput.nextLine();
+            double amount = Double.parseDouble(userChoice);
+            if (amount <= 100) {
+                money.addMoney(amount);
+                break;
+            } else {
+                System.out.println("Amount input exceeds $100 please try again");
+            }
+        }
+
+    }
+
 }
