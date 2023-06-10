@@ -10,10 +10,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class InventoryItemTest {
+
     private Inventory inventoryItem;
 
     @Before
-    public void setup(){
+    public void setup() {
         inventoryItem = new Inventory("inventoryTest.csv");
     }
 
@@ -30,6 +31,7 @@ public class InventoryItemTest {
         //Assert
         Assert.assertEquals(expectedInventory, actualInventory);
     }
+}
 
 //    @Test
 //    public void test_restock_inventory() throws FileNotFoundException {
@@ -43,12 +45,13 @@ public class InventoryItemTest {
 //            expectedCandy.getValue().setQuantity(100);
 //        }
 //        //Act
-////        Map<String, Candy> actualInventory = inventoryItem.inventoryBuilder();
-////        UpdatedInventory.restockInventory();
-////        for (Map.Entry<String, Candy> candy : actualInventory.entrySet()) {
-////            System.out.println(candy.getValue().getQuantity());
-////        }
+//        Map<String, Candy> actualInventory = inventoryItem.inventoryBuilder();
+//        UpdatedInventory.restockInventory();
+//        for (Map.Entry<String, Candy> candy : actualInventory.entrySet()) {
+//            System.out.println(candy.getValue().getQuantity());
+//        }
+//
 //        //Assert
 //        Assert.assertEquals(expectedInventory, actualInventory);
-//    }
-}
+
+

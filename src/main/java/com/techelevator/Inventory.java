@@ -9,14 +9,16 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Inventory {
-    //Constructor
-    public Inventory(String inventoryFilePath) {
-        this.filepath = inventoryFilePath;
-    }
 
     //Attributes
     private final String filepath;
     Map<String, Candy> inventory;
+
+
+    //Constructor
+    public Inventory(String inventoryFilePath) {
+        this.filepath = inventoryFilePath;
+    }
 
 
     //Methods
@@ -40,7 +42,6 @@ public class Inventory {
                 }
 
                 double price = Double.parseDouble(currentLineToArray[3]);
-                //BigDecimal bD = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
                 String typeOfCandy = currentLineToArray[0];
 
                 if (typeOfCandy.equalsIgnoreCase("CH")) {

@@ -3,6 +3,12 @@ package com.techelevator.candy;
 import java.util.Objects;
 
 public class Candy {
+    //Attributes
+    private String ID;
+    private String name;
+    private double price;
+    private boolean isWrapped;
+    private int quantity;
 
 
     //Constructor
@@ -10,16 +16,8 @@ public class Candy {
         this.ID = ID;
         this.name = name;
         this.isWrapped = isWrapped;
-
         this.price = price;
     }
-
-    //Attributes
-    private String ID;
-    private String name;
-    private double price;
-    private boolean isWrapped;
-    private int quantity;
 
 
     //Getters and Setters
@@ -47,6 +45,7 @@ public class Candy {
         this.quantity = quantity;
     }
 
+
     @Override
     public String toString() {
         return "Candy{" +
@@ -58,6 +57,7 @@ public class Candy {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,6 +65,7 @@ public class Candy {
         Candy candy = (Candy) o;
         return Double.compare(candy.price, price) == 0 && isWrapped == candy.isWrapped && quantity == candy.quantity && Objects.equals(ID, candy.ID) && Objects.equals(name, candy.name);
     }
+
 
     @Override
     public int hashCode() {

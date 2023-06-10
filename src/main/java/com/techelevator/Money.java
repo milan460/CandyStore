@@ -1,7 +1,6 @@
 package com.techelevator;
 
 public class Money {
-    //constructor
 
     //Attributes
     private double balance;
@@ -13,8 +12,8 @@ public class Money {
     private final double DIMES = 0.10;
     private final double NICKELS = 0.05;
 
-    //Getters and Setters
 
+    //Getters and Setters
     public double getBalance() {
         return balance;
     }
