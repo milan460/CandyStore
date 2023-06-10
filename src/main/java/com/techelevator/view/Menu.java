@@ -92,28 +92,40 @@ public class Menu {
     }
 
     public void promptUserSelect(Map<String, Candy> inventory) {
-        while (true) {
+        boolean matchingId = false;
+        while (!matchingId) {
             System.out.println("Which candy would you like to buy? Enter candy ID: ");
             String userChoice = userInput.nextLine();
+            int quantityChoice;
 
             for (Map.Entry<String, Candy> userEntry : inventory.entrySet()) {
+                if(userEntry.getKey().equals(userChoice)) {
 
-                    if (userEntry.getValue().getID() != userChoice) {
-                        System.out.println("Does not match candy ID, please try again: ");
-                        break;
-
-                    } else if (userEntry.getValue().getQuantity() == 0) {
+                    if (userEntry.getValue().getQuantity() == 0) {
                         System.out.println("I'm sorry, but that item is SOLD OUT, please make another selection: ");
                         break;
-
-                    } else if (userEntry.getValue().getID() == userChoice)
+                    }
+                    while(true) {
+                        matchingId = true;
                         System.out.println("Please select quantity for candy selected: ");
                         userChoice = userInput.nextLine();
-                        break;
+                        quantityChoice = Integer.parseInt(userChoice);
+                        if (quantityChoice > userEntry.getValue().getQuantity()) {
+                            System.out.println("Store only has '" + userEntry.getValue().getQuantity() + "' left in stock. Please select smaller quantity.");
+                            break;
+                        }
                     }
+                }
+            }
+            if(!matchingId) {
+                    System.out.println("Does not match candy ID, please try again.");
+                    System.out.println(" ");
+                    break;
             }
         }
     }
+}
+
 
 //    public List<String> getUserCartSelections(String choice) {
 //        List<String> cartSkus = new ArrayList<>();
