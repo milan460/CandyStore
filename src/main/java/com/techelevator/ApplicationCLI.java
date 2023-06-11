@@ -51,13 +51,20 @@ public class ApplicationCLI {
 			if (choice.equals("display")) {
 				menu.displayInventory(inventory);
 			} else if (choice.equals("sale")) {
-				String choiceSubmenu = menu.subMenu();
-				if (choiceSubmenu.equals("take money")) {
-					menu.promptUserAmount();
-				}
-				if (choiceSubmenu.equals("select products")) {
-					menu.displayInventory(inventory);
-					menu.promptUserSelect(inventory);
+				while(true) {
+					String choiceSubmenu = menu.subMenu();
+					if (choiceSubmenu.equals("take money")) {
+						menu.promptUserAmount();
+					}
+					else if (choiceSubmenu.equals("select products")) {
+						menu.displayInventory(inventory);
+						menu.promptUserSelect(inventory);
+					}
+					else if(choiceSubmenu.equalsIgnoreCase("complete sale")){
+						menu.completeSalePrompt();
+						break;
+					}
+
 				}
 			} else if (choice.equals("quit")) {
 				System.exit(0);

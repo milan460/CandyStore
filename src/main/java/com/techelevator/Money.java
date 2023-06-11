@@ -1,13 +1,16 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
+import java.util.*;
+
 public class Money {
 
     //Attributes
     private double balance;
-    private final double TWENTIES = 20.00;
-    private final double TENS = 10.00;
-    private final double FIVES = 5.00;
-    private final double ONES = 1.00;
+    private final double TWENTIES = 20.0;
+    private final double TENS = 10.0;
+    private final double FIVES = 5.0;
+    private final double ONES = 1.0;
     private final double QUARTERS = 0.25;
     private final double DIMES = 0.10;
     private final double NICKELS = 0.05;
@@ -45,10 +48,68 @@ public class Money {
 
 
 
-//    public void giveChange() {
-//        double changeGiven = balance - ;
+    public Map<String, Integer> giveChange() {
+
+        Map<String, Integer> billCounter = new TreeMap<>();
+
+        List<Double> bills = new ArrayList<>();
+        bills.add(TWENTIES);
+        bills.add(TENS);
+        bills.add(ONES);
+        bills.add(QUARTERS);
+        bills.add(DIMES);
+        bills.add(NICKELS);
+//        Collections.sort(bills);
+        for(int i = 0; i < bills.size(); i++){
+            double bill = bills.get(i);
+            int counter = 0;
+            double coinBalance = (balance % 10) * 100;
+            double dollarBalance = Math.floor(balance);
+            while(dollarBalance >= bill){
+                dollarBalance = dollarBalance - bill;
+                counter++;
+            }
+            if(bill == TWENTIES){
+                billCounter.put("Twenty(s)", counter);
+            }
+            else if(bill == TENS){
+                billCounter.put("Ten(s)", counter);
+            }
+            else if(bill == ONES){
+                billCounter.put("One(s)", counter);
+            }
+            else if(bill == QUARTERS){
+                billCounter.put("Quarter(s)", counter);
+            }
+            else if(bill == DIMES){
+                billCounter.put("Dime(s)", counter);
+            }
+            else if(bill == NICKELS){
+                billCounter.put("Nickel(s)", counter);
+            }
+
+        }
+        return billCounter;
 //        if (balance >= TWENTIES){
-//
+//            twentyCounter++;
 //        }
-//    }
+//        else if (balance >= TENS){
+//            tenCounter++;
+//        }
+//        else if (balance >= FIVES){
+//            fiveCounter++;
+//        }
+//        else if (balance >= ONES){
+//            oneCounter++;
+//        }
+//        else if (balance >= QUARTERS){
+//            quarterCounter++;
+//        }
+//        else if (balance >= DIMES){
+//            dimeCounter++;
+//        }
+//        else if (balance >= NICKELS){
+//            nickelCounter++;
+//        }
+    }
 }

@@ -11,6 +11,7 @@ public class Menu {
     //Attributes
     private Money money = new Money();
     private Scanner userInput = new Scanner(System.in);
+    List<ShoppingCart> finishedCart = new ArrayList<>();
 
 
     //Methods
@@ -42,15 +43,18 @@ public class Menu {
         for (Map.Entry<String, Candy> candyEntry : inventory.entrySet()) {
             String wrapped = "N";
             String soldOut = "";
+            Candy candy = candyEntry.getValue();
             if (candyEntry.getValue().isWrapped() == true) {
                 wrapped = "Y";
             }
 
             if (candyEntry.getValue().getQuantity() == 0) {
                 soldOut = "SOLD OUT";
+                System.out.printf("%-10S %-20s %-10s %-10s $%-5.2f\n", candy.getID(), candy.getName(), wrapped, soldOut, candy.getPrice());
             }
-            Candy candy = candyEntry.getValue();
-            System.out.printf("%-10S %-20s %-10s %-10d $%-5.2f\n", candy.getID(), candy.getName(), wrapped, candy.getQuantity(), candy.getPrice());
+            else {
+                System.out.printf("%-10S %-20s %-10s %-10d $%-5.2f\n", candy.getID(), candy.getName(), wrapped, candy.getQuantity(), candy.getPrice());
+            }
         }
         System.out.println("");
     }
@@ -110,8 +114,24 @@ public class Menu {
                         System.out.println("Please select quantity for candy selected: ");
                         userChoice = userInput.nextLine();
                         quantityChoice = Integer.parseInt(userChoice);
+                        double totalAmount = 0.00;
+                        if(quantityChoice <= userEntry.getValue().getQuantity()) {
+                            totalAmount = quantityChoice * userEntry.getValue().getPrice();
+                        }
                         if (quantityChoice > userEntry.getValue().getQuantity()) {
                             System.out.println("Store only has '" + userEntry.getValue().getQuantity() + "' left in stock. Please select smaller quantity.");
+                        }
+                        else if(totalAmount > money.getBalance()){
+                            System.out.println("Insufficient Funds. Please add money to your balance or choose another item.");
+                            break;
+                        }
+                        else if(quantityChoice <= userEntry.getValue().getQuantity()){
+                            int differenceInQuantity = userEntry.getValue().getQuantity() - quantityChoice;
+                            userEntry.getValue().setQuantity(differenceInQuantity);
+                            double updatedBalance = money.getBalance() - totalAmount;
+                            money.setBalance(updatedBalance);
+                            ShoppingCart cartItems = new ShoppingCart(userEntry.getValue(), quantityChoice, totalAmount);
+                            finishedCart.add(cartItems);
                             break;
                         }
                     }
@@ -124,23 +144,27 @@ public class Menu {
             }
         }
     }
+
+    public void completeSalePrompt(){
+        for(int i = 0; i < finishedCart.size(); i++){
+            ShoppingCart item = finishedCart.get(i);
+            int quantity = item.getQuantity();
+            Candy candyItem = item.getCandy();
+            double totalAmount = item.getTotalAmount();
+            String candyDescription = item.getCandy().getDescription();
+            double candyPrice = item.getCandy().getPrice();
+            String candyName = item.getCandy() .getName();
+            System.out.printf("%-5d %-15s %-26s $%-8.2f $%-5.2f\n", quantity, candyName, candyDescription, candyPrice, totalAmount);
+        }
+
+        Map<String, Integer> change = money.giveChange();
+
+        for(Map.Entry<String, Integer> bill : change.entrySet()){
+            System.out.println(bill.getKey() + bill.getValue());
+        }
+    }
 }
 
 
-//    public List<String> getUserCartSelections(String choice) {
-//        List<String> cartSkus = new ArrayList<>();
-//        while(choice.equalsIgnoreCase("purchase")){
-//            // make a purchase
-//            displayMessage("Please enter the sku of the item you wish to purchase or enter x when finished: ");
-//            String skuSelected = getUserInput();
-//            if(skuSelected.equalsIgnoreCase("x")){
-//                break;
-//            }
-//            //add sku selected to list of skus
-//            cartSkus.add(skuSelected);
-//        }
-//        return cartSkus;
-//    }
-//}
 
 

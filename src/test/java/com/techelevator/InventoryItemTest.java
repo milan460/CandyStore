@@ -22,10 +22,10 @@ public class InventoryItemTest {
     public void test_inventory_builder() throws FileNotFoundException {
         //Arrange
         Map<String, Candy> expectedInventory = new TreeMap<>();
-        expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
-        expectedInventory.put("S1", new SourCandy("S1", "Gummy Ants", false, 1.10));
-        expectedInventory.put("H1", new HardCandy("H1", "Jolly Cowboy", true, 2.35));
-        expectedInventory.put("L3", new LicoriceCandy("L3", "Anise Twist", true, 0.90));
+        expectedInventory.put("C1", new ChocolateCandy("C1","Chocolate Confectionery","Snuckers Bar", true, 1.35));
+        expectedInventory.put("S1", new SourCandy("S1","Sour Flavored Candies","Gummy Ants", false, 1.10));
+        expectedInventory.put("H1", new HardCandy("H1", "Hard Tack Confectionery","Jolly Cowboy", true, 2.35));
+        expectedInventory.put("L3", new LicoriceCandy("L3", "Licorice and Jellies","Anise Twist", true, 0.90));
         //Act
         Map<String, Candy> actualInventory = inventoryItem.inventoryBuilder();
         //Assert
