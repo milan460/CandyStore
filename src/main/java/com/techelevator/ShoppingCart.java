@@ -1,4 +1,4 @@
-package com.techelevator.view;
+package com.techelevator;
 
 import com.techelevator.candy.Candy;
 
@@ -30,10 +30,6 @@ public class ShoppingCart {
 
     public double getTotalAmount() {
         return totalAmount;
-    }
-
-    public void buildReceipt(Candy candy, int quantity, double totalAmount){
-
     }
 
 }

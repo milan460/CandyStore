@@ -12,10 +12,12 @@ import java.util.TreeMap;
 public class InventoryItemTest {
 
     private Inventory inventoryItem;
+    Candy candy;
 
     @Before
     public void setup() {
         inventoryItem = new Inventory("inventoryTest.csv");
+
     }
 
     @Test
@@ -26,6 +28,10 @@ public class InventoryItemTest {
         expectedInventory.put("S1", new SourCandy("S1","Sour Flavored Candies","Gummy Ants", false, 1.10));
         expectedInventory.put("H1", new HardCandy("H1", "Hard Tack Confectionery","Jolly Cowboy", true, 2.35));
         expectedInventory.put("L3", new LicoriceCandy("L3", "Licorice and Jellies","Anise Twist", true, 0.90));
+
+        for(Map.Entry<String, Candy> candy : expectedInventory.entrySet()){
+            candy.getValue().setQuantity(100);
+        }
         //Act
         Map<String, Candy> actualInventory = inventoryItem.inventoryBuilder();
         //Assert
@@ -33,25 +39,5 @@ public class InventoryItemTest {
     }
 }
 
-//    @Test
-//    public void test_restock_inventory() throws FileNotFoundException {
-//        //Arrange
-//        Map<String, Candy> expectedInventory = new TreeMap<>();
-//        expectedInventory.put("C1", new ChocolateCandy("C1", "Snuckers Bar", true, 1.35));
-//        expectedInventory.put("S1", new SourCandy("S1", "Gummy Ants", false, 1.10));
-//        expectedInventory.put("H1", new HardCandy("H1", "Jolly Cowboy", true, 2.35));
-//        expectedInventory.put("L3", new LicoriceCandy("L3", "Anise Twist", true, 0.90));
-//        for (Map.Entry<String, Candy> expectedCandy : expectedInventory.entrySet()) {
-//            expectedCandy.getValue().setQuantity(100);
-//        }
-//        //Act
-//        Map<String, Candy> actualInventory = inventoryItem.inventoryBuilder();
-//        UpdatedInventory.restockInventory();
-//        for (Map.Entry<String, Candy> candy : actualInventory.entrySet()) {
-//            System.out.println(candy.getValue().getQuantity());
-//        }
-//
-//        //Assert
-//        Assert.assertEquals(expectedInventory, actualInventory);
 
 

@@ -1,7 +1,7 @@
 package com.techelevator.view;
 
-import com.techelevator.Inventory;
 import com.techelevator.Money;
+import com.techelevator.ShoppingCart;
 import com.techelevator.candy.Candy;
 
 import java.util.*;
@@ -17,10 +17,10 @@ public class Menu {
     //Methods
     public String mainMenu() {
 
-        System.out.println("(1) Show Inventory");
+        System.out.println("\n(1) Show Inventory");
         System.out.println("(2) Make Sale");
         System.out.println("(3) Quit");
-        System.out.println("Choose menu option: ");
+        System.out.println("\nChoose menu option: ");
         String userChoice = userInput.nextLine();
         String option = userChoice.trim();
 
@@ -61,11 +61,11 @@ public class Menu {
 
 
     public String subMenu() {
-        System.out.println("(1) Take Money");
+        System.out.println("\n(1) Take Money");
         System.out.println("(2) Select Products");
         System.out.println("(3) Complete Sale");
-        System.out.printf("Current Customer Balance: $%-5.2f", money.getBalance());
-        System.out.println("\nChoose menu option: ");
+        System.out.printf("Current Customer Balance: $%-5.2f\n", money.getBalance());
+        System.out.println("Choose menu option: ");
         String userChoice = userInput.nextLine();
         String option = userChoice.trim();
 
@@ -82,14 +82,14 @@ public class Menu {
 
     public void promptUserAmount() {
         while (true) {
-            System.out.println("Enter desired $ amount (Max $100 per entry): ");
+            System.out.println("\nEnter desired $ amount (Max $100 per entry): ");
             String userChoice = userInput.nextLine();
             double amount = Double.parseDouble(userChoice);
             if (amount <= 100) {
                 money.addMoney(amount);
                 break;
             } else {
-                System.out.println("Amount input exceeds $100 please try again");
+                System.out.println("\nAmount input exceeds $100 please try again");
             }
         }
 
@@ -146,6 +146,10 @@ public class Menu {
     }
 
     public void completeSalePrompt(){
+
+        System.out.println("\nRECEIPT: \n");
+        System.out.printf("%-15s %-15s %-26s %-9s %-10s\n", "Quantity", "Name", "Description", "Price", "Amount");
+
         for(int i = 0; i < finishedCart.size(); i++){
             ShoppingCart item = finishedCart.get(i);
             int quantity = item.getQuantity();
@@ -154,14 +158,20 @@ public class Menu {
             String candyDescription = item.getCandy().getDescription();
             double candyPrice = item.getCandy().getPrice();
             String candyName = item.getCandy() .getName();
-            System.out.printf("%-5d %-15s %-26s $%-8.2f $%-5.2f\n", quantity, candyName, candyDescription, candyPrice, totalAmount);
+            System.out.printf("%-15d %-15s %-26s $%-8.2f $%-5.2f\n", quantity, candyName, candyDescription, candyPrice, totalAmount);
         }
-
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("TOTAL: $");
+        System.out.println();
         Map<String, Integer> change = money.giveChange();
+        System.out.println("\nCHANGE: $" + money.getTotalChange());
+
+
 
         for(Map.Entry<String, Integer> bill : change.entrySet()){
-            System.out.println(bill.getKey() + bill.getValue());
+            System.out.print(bill.getKey() + " (" + bill.getValue() + ") | ");
         }
+        System.out.println("\n");
     }
 }
 
