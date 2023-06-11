@@ -59,7 +59,7 @@ public class Inventory {
                 currentItem.setQuantity(100);
                 inventory.put(ID, currentItem);
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ex) {
             System.out.println("Input file does not exist");
         }
         return inventory;
