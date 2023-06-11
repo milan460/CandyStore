@@ -14,12 +14,10 @@ public class Inventory {
     private final String filepath;
     Map<String, Candy> inventory;
 
-
     //Constructor
     public Inventory(String inventoryFilePath) {
         this.filepath = inventoryFilePath;
     }
-
 
     //Methods
     public Map<String, Candy> inventoryBuilder() throws FileNotFoundException {
@@ -45,16 +43,16 @@ public class Inventory {
                 String typeOfCandy = currentLineToArray[0];
 
                 if (typeOfCandy.equalsIgnoreCase("CH")) {
-                    currentItem = new ChocolateCandy(ID, currentLineToArray[2], isWrapped, price);
+                    currentItem = new ChocolateCandy(ID, "Chocolate Confectionery", currentLineToArray[2], isWrapped, price);
 
                 } else if (typeOfCandy.equalsIgnoreCase("SR")) {
-                    currentItem = new SourCandy(ID, currentLineToArray[2], isWrapped, price);
+                    currentItem = new SourCandy(ID, "Sour Flavored Candies",currentLineToArray[2], isWrapped, price);
 
                 } else if (typeOfCandy.equalsIgnoreCase("HC")) {
-                    currentItem = new HardCandy(ID, currentLineToArray[2], isWrapped, price);
+                    currentItem = new HardCandy(ID,"Hard Tack Confectionery" ,currentLineToArray[2], isWrapped, price);
 
                 } else if (typeOfCandy.equalsIgnoreCase("LI")) {
-                    currentItem = new LicoriceCandy(ID, currentLineToArray[2], isWrapped, price);
+                    currentItem = new LicoriceCandy(ID, "Licorice and Jellies" ,currentLineToArray[2], isWrapped, price);
                 }
                 currentItem.setQuantity(100);
                 inventory.put(ID, currentItem);

@@ -10,13 +10,16 @@ public class Candy {
     private boolean isWrapped;
     private int quantity;
 
+    private String description = "";
+
 
     //Constructor
-    public Candy(String ID, String name, boolean isWrapped, double price){
+    public Candy(String ID, String description, String name, boolean isWrapped, double price){
         this.ID = ID;
         this.name = name;
         this.isWrapped = isWrapped;
         this.price = price;
+        this.description = description;
     }
 
 
@@ -33,6 +36,10 @@ public class Candy {
         return price;
     }
 
+    public String getDescription(){
+        return description;
+    }
+
     public boolean isWrapped() {
         return isWrapped;
     }
@@ -43,6 +50,10 @@ public class Candy {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 
 
