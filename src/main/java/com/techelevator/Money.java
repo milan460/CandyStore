@@ -15,7 +15,6 @@ public class Money {
     private final double DIMES = 0.10;
     private final double NICKELS = 0.05;
 
-
     //Getters and Setters
     public double getBalance() {
         return balance;
@@ -42,11 +41,10 @@ public class Money {
 
     }
 
-
-
     public Map<String, Integer> giveChange() {
 
-        Map<String, Integer> billCounter = new TreeMap<>();
+        Map<String, Integer> billCounter = new LinkedHashMap<>();
+
 
         List<Double> bills = new ArrayList<>();
         bills.add(TWENTIES);
@@ -60,9 +58,6 @@ public class Money {
 
         for(int i = 0; i < bills.size(); i++){
 
-            if(balance == 0.00){
-                break;
-            }
             double bill = bills.get(i);
             int counter = 0;
 
@@ -94,11 +89,9 @@ public class Money {
             }
             else if(bill == NICKELS){
                 billCounter.put("Nickel(s)", counter);
-                totalChange += (NICKELS * 20);
+                totalChange += (NICKELS * counter);
             }
-
         }
-
         return billCounter;
     }
 

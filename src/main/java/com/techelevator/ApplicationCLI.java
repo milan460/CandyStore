@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.candy.Candy;
+import com.techelevator.filereader.LogFileWriter;
 import com.techelevator.view.Menu;
 
 import java.io.FileNotFoundException;
@@ -11,6 +12,8 @@ public class ApplicationCLI {
 	//Attributes
 	private Menu menu = new Menu();
 	private Map<String, Candy> inventory;
+	private Money money = new Money();
+
 
 
 	//Constructor
@@ -18,11 +21,12 @@ public class ApplicationCLI {
 		this.inventory = inventory;
 	}
 
-
 	//Methods
 	public static void main(String[] args) {
-		Inventory inventoryBuilder = new Inventory("inventory.csv");
+		LogFileWriter outputFile = new LogFileWriter();
+		outputFile.logWriter("MONEY RECEIVED", 0.0, 0.0);
 
+		Inventory inventoryBuilder = new Inventory("inventory.csv");
 
 		ApplicationCLI cli;
 		try {

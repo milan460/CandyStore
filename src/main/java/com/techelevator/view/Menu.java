@@ -1,8 +1,10 @@
 package com.techelevator.view;
 
+import com.sun.source.tree.Tree;
 import com.techelevator.Money;
 import com.techelevator.ShoppingCart;
 import com.techelevator.candy.Candy;
+import com.techelevator.filereader.LogFileWriter;
 
 import java.util.*;
 
@@ -11,7 +13,7 @@ public class Menu {
     //Attributes
     private Money money = new Money();
     private Scanner userInput = new Scanner(System.in);
-    List<ShoppingCart> finishedCart = new ArrayList<>();
+    private List<ShoppingCart> finishedCart = new ArrayList<>();
 
 
     //Methods
@@ -33,7 +35,6 @@ public class Menu {
         }
         return option;
     }
-
 
     public void displayInventory(Map<String, Candy> inventory) {
 
@@ -59,7 +60,6 @@ public class Menu {
         System.out.println("");
     }
 
-
     public String subMenu() {
         System.out.println("\n(1) Take Money");
         System.out.println("(2) Select Products");
@@ -79,20 +79,27 @@ public class Menu {
         return option;
     }
 
-
     public void promptUserAmount() {
+        LogFileWriter logFileWriter = new LogFileWriter();
         while (true) {
-            System.out.println("\nEnter desired $ amount (Max $100 per entry): ");
+            System.out.println("\nEnter desired $ amount (Max $100 per entry, Max $1000 total): ");
             String userChoice = userInput.nextLine();
             double amount = Double.parseDouble(userChoice);
+            String action = "MONEY RECEIVED";
+
+            if (amount + money.getBalance() > 1000) {
+                System.out.println("\nBalance total exceeds $1000, please try again.");
+            }
+
             if (amount <= 100) {
                 money.addMoney(amount);
+                logFileWriter.logWriter(action, money.getBalance() - amount, money.getBalance());
                 break;
+
             } else {
-                System.out.println("\nAmount input exceeds $100 please try again");
+                System.out.println("\nAmount input exceeds $100, please try again.");
             }
         }
-
     }
 
     public void promptUserSelect(Map<String, Candy> inventory) {
@@ -109,6 +116,7 @@ public class Menu {
                         System.out.println("I'm sorry, but that item is SOLD OUT, please make another selection: ");
                         break;
                     }
+
                     while(true) {
                         matchingId = true;
                         System.out.println("Please select quantity for candy selected: ");
@@ -118,13 +126,16 @@ public class Menu {
                         if(quantityChoice <= userEntry.getValue().getQuantity()) {
                             totalAmount = quantityChoice * userEntry.getValue().getPrice();
                         }
+
                         if (quantityChoice > userEntry.getValue().getQuantity()) {
                             System.out.println("Store only has '" + userEntry.getValue().getQuantity() + "' left in stock. Please select smaller quantity.");
                         }
+
                         else if(totalAmount > money.getBalance()){
                             System.out.println("Insufficient Funds. Please add money to your balance or choose another item.");
                             break;
                         }
+
                         else if(quantityChoice <= userEntry.getValue().getQuantity()){
                             int differenceInQuantity = userEntry.getValue().getQuantity() - quantityChoice;
                             userEntry.getValue().setQuantity(differenceInQuantity);
@@ -137,6 +148,7 @@ public class Menu {
                     }
                 }
             }
+
             if(!matchingId) {
                     System.out.println("Does not match candy ID, please try again.");
                     System.out.println(" ");
@@ -146,6 +158,8 @@ public class Menu {
     }
 
     public void completeSalePrompt(){
+        LogFileWriter logFileWriter = new LogFileWriter();
+        double receiptTotal = 0.0;
 
         System.out.println("\nRECEIPT: \n");
         System.out.printf("%-15s %-15s %-26s %-9s %-10s\n", "Quantity", "Name", "Description", "Price", "Amount");
@@ -158,15 +172,20 @@ public class Menu {
             String candyDescription = item.getCandy().getDescription();
             double candyPrice = item.getCandy().getPrice();
             String candyName = item.getCandy() .getName();
+            String action = item.getQuantity() + " " + candyName + " " + item.getCandy().getID();
+            logFileWriter.logWriter(action, money.getBalance() + totalAmount, money.getBalance());
+
+
+            receiptTotal += totalAmount;
             System.out.printf("%-15d %-15s %-26s $%-8.2f $%-5.2f\n", quantity, candyName, candyDescription, candyPrice, totalAmount);
         }
         System.out.println("---------------------------------------------------------------------------------------");
-        System.out.println("TOTAL: $");
+        System.out.printf("TOTAL: $%-5.2f\n", receiptTotal);
         System.out.println();
         Map<String, Integer> change = money.giveChange();
-        System.out.println("\nCHANGE: $" + money.getTotalChange());
-
-
+        System.out.printf("\nCHANGE: $%-5.2f\n", money.getTotalChange());
+        String action = "CHANGE GIVEN";
+        logFileWriter.logWriter(action, money.getTotalChange(), money.getBalance());
 
         for(Map.Entry<String, Integer> bill : change.entrySet()){
             System.out.print(bill.getKey() + " (" + bill.getValue() + ") | ");

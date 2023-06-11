@@ -14,12 +14,10 @@ public class Inventory {
     private final String filepath;
     Map<String, Candy> inventory;
 
-
     //Constructor
     public Inventory(String inventoryFilePath) {
         this.filepath = inventoryFilePath;
     }
-
 
     //Methods
     public Map<String, Candy> inventoryBuilder() throws FileNotFoundException {
