@@ -112,7 +112,7 @@ public class Menu {
                         quantityChoice = Integer.parseInt(userChoice);
                         if (quantityChoice > userEntry.getValue().getQuantity()) {
                             System.out.println("Store only has '" + userEntry.getValue().getQuantity() + "' left in stock. Please select smaller quantity.");
-                            break;
+
                         }
                     }
                 }
