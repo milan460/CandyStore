@@ -17,6 +17,12 @@ public class Menu {
 
 
     //Methods
+
+    public void printGreeting(){
+        System.out.println("**************************");
+        System.out.println("* Welcome to CandyStore! *");
+        System.out.println("**************************");
+    }
     public String mainMenu() {
 
         System.out.println("\n(1) Show Inventory");
@@ -61,7 +67,7 @@ public class Menu {
     }
 
     public String subMenu() {
-        System.out.println("\n(1) Take Money");
+        System.out.println("\n(1) Deposit Money");
         System.out.println("(2) Select Products");
         System.out.println("(3) Complete Sale");
         System.out.printf("Current Customer Balance: $%-5.2f\n", money.getBalance());
@@ -70,7 +76,7 @@ public class Menu {
         String option = userChoice.trim();
 
         if (option.equalsIgnoreCase("1")) {
-            option = "take money";
+            option = "deposit money";
         } else if (option.equalsIgnoreCase("2")) {
             option = "select products";
         } else if (option.equalsIgnoreCase("3")) {

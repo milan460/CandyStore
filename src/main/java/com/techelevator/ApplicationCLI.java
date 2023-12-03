@@ -48,7 +48,7 @@ public class ApplicationCLI {
 		//outer loop....
 		//feel free to create private methods here if you are feeling up to it, so run() doesn't get so long...
 
-
+		menu.printGreeting();
 		Money money = new Money();
 		while (true) {
 			String choice = menu.mainMenu();
@@ -57,7 +57,7 @@ public class ApplicationCLI {
 			} else if (choice.equals("sale")) {
 				while(true) {
 					String choiceSubmenu = menu.subMenu();
-					if (choiceSubmenu.equals("take money")) {
+					if (choiceSubmenu.equals("deposit money")) {
 						menu.promptUserAmount();
 					}
 					else if (choiceSubmenu.equals("select products")) {

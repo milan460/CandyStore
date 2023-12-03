@@ -84,3 +84,5 @@ target
 
 #Random log files
 *.log
+
+Log.txt
